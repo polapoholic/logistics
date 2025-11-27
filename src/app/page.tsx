@@ -239,6 +239,30 @@ export default function HomePage() {
               ))}
             </div>
           </section>
+          // 예: app/page.tsx 안에 섹션 하나 추가
+          <section className="space-y-4">
+            <h2 className="text-xl font-semibold text-slate-900">시설 / 현장 전경</h2>
+            <p className="text-sm text-slate-600">
+              실제 운송이 이루어지는 창고와 상·하차 현장의 모습을 확인하실 수 있습니다.
+            </p>
+            <div className="grid gap-3 md:grid-cols-3">
+              <div className="h-32 rounded-xl bg-slate-200 overflow-hidden">
+                <img src="/warehouse-1.jpg" className="w-full h-full object-cover" alt="창고 전경" />
+              </div>
+              <div className="h-32 rounded-xl bg-slate-200 overflow-hidden">
+                <img src="/warehouse-2.jpg" className="w-full h-full object-cover" alt="상하차장" />
+              </div>
+              <div className="h-32 rounded-xl bg-slate-200 overflow-hidden">
+                <img src="/warehouse-3.jpg" className="w-full h-full object-cover" alt="출고 라인" />
+              </div>
+            </div>
+            <a
+                href="/facility"
+                className="inline-flex text-xs font-medium text-sky-700 hover:underline"
+            >
+              자세히 보기 →
+            </a>
+          </section>
 
           {/* 문의 / 명함 섹션 */}
           <section
