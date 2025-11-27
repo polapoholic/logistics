@@ -1,8 +1,40 @@
 // app/page.tsx
+'use client'
+
+import { useState } from 'react'
 
 export default function HomePage() {
   const COMPANY_NAME = '다성 물류'
   const COMPANY_NAME_EN = 'DASEONG LOGISTICS'
+
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [subject, setSubject] = useState('운송 견적 문의')
+  const [message, setMessage] = useState('')
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true)
+  }
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false)
+  }
+
+  const handleSendMail = () => {
+    if (!message.trim()) {
+      alert('문의 내용을 입력해 주세요.')
+      return
+    }
+
+    const to = 'sales@daseong-logis.co.kr' // 실제 사용할 영업 메일로 변경
+    const mailSubject = encodeURIComponent(subject || '운송 견적 문의')
+    const mailBody = encodeURIComponent(message)
+
+    // 기본 메일 클라이언트 열기
+    window.location.href = `mailto:${to}?subject=${mailSubject}&body=${mailBody}`
+
+    // 메일창 띄운 후 모달 닫기
+    setIsModalOpen(false)
+  }
 
   return (
       <main className="min-h-screen bg-gradient-to-b from-sky-50 via-white to-slate-100 text-slate-900">
@@ -31,7 +63,7 @@ export default function HomePage() {
                 네트워크
               </a>
               <a href="#contact" className="hover:text-sky-600">
-                문의
+                연락처
               </a>
             </nav>
           </div>
@@ -55,12 +87,13 @@ export default function HomePage() {
                 실시간 화물 추적과 체계적인 운송 관리로 안정적인 리드타임을 제공합니다.
               </p>
               <div className="flex flex-wrap gap-3 pt-2">
-                <a
-                    href="#contact"
+                <button
+                    type="button"
+                    onClick={handleOpenModal}
                     className="inline-flex items-center justify-center rounded-full bg-sky-500 px-5 py-2.5 text-sm font-medium text-white shadow-sm hover:bg-sky-600 transition-colors"
                 >
                   운송 견적 문의하기
-                </a>
+                </button>
                 <a
                     href="#services"
                     className="inline-flex items-center justify-center rounded-full border border-sky-200 bg-white px-5 py-2.5 text-sm font-medium text-sky-700 hover:bg-sky-50 transition-colors"
@@ -70,7 +103,7 @@ export default function HomePage() {
               </div>
               <div className="flex flex-wrap gap-4 pt-4 text-xs text-slate-500">
                 <div className="flex items-center gap-2">
-                  <span className="inline-block h-2 w-2 rounded-full bg-emerald-500" />
+                  <span className="inline-block h-2 w-2 rounded-full bg-emerald-500"/>
                   평균 정시 도착률 98% 이상
                 </div>
                 <div className="flex items-center gap-2">
@@ -234,6 +267,72 @@ export default function HomePage() {
               </div>
             </div>
           </section>
+          {/* 문의 모달 */}
+          {isModalOpen && (
+              <div className="fixed inset-0 z-30 flex items-center justify-center bg-black/40">
+                <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-xl">
+                  <div className="flex items-center justify-between mb-4">
+                    <h2 className="text-base font-semibold text-slate-900">
+                      운송 견적 문의
+                    </h2>
+                    <button
+                        type="button"
+                        onClick={handleCloseModal}
+                        className="text-slate-400 hover:text-slate-600 text-sm"
+                    >
+                      ✕
+                    </button>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div>
+                      <label className="mb-1 block text-xs font-semibold text-slate-600">
+                        제목
+                      </label>
+                      <input
+                          type="text"
+                          value={subject}
+                          onChange={(e) => setSubject(e.target.value)}
+                          className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-200"
+                          placeholder="예: ○○물류 운송 견적 문의 드립니다."
+                      />
+                    </div>
+
+                    <div>
+                      <label className="mb-1 block text-xs font-semibold text-slate-600">
+                        문의 내용
+                      </label>
+                      <textarea
+                          value={message}
+                          onChange={(e) => setMessage(e.target.value)}
+                          rows={6}
+                          className="w-full resize-none rounded-lg border border-slate-200 px-3 py-2 text-sm outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-200"
+                          placeholder={
+                            '회사명 / 담당자명 / 연락처 / 출고지 / 도착지 / 물량 정보 등을 함께 적어 주시면 더 빠르게 안내 드릴 수 있습니다.'
+                          }
+                      />
+                    </div>
+                  </div>
+
+                  <div className="mt-5 flex justify-end gap-2">
+                    <button
+                        type="button"
+                        onClick={handleCloseModal}
+                        className="rounded-full border border-slate-200 px-4 py-2 text-xs font-medium text-slate-600 hover:bg-slate-50"
+                    >
+                      취소
+                    </button>
+                    <button
+                        type="button"
+                        onClick={handleSendMail}
+                        className="rounded-full bg-sky-500 px-4 py-2 text-xs font-medium text-white hover:bg-sky-600"
+                    >
+                      문의 메일 열기
+                    </button>
+                  </div>
+                </div>
+              </div>
+          )}
 
           {/* 푸터 */}
           <footer className="border-t border-slate-200 pt-4 pb-8 text-xs text-slate-500">
