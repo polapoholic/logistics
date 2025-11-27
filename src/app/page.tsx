@@ -239,7 +239,6 @@ export default function HomePage() {
               ))}
             </div>
           </section>
-          // 예: app/page.tsx 안에 섹션 하나 추가
           <section className="space-y-4">
             <h2 className="text-xl font-semibold text-slate-900">시설 / 현장 전경</h2>
             <p className="text-sm text-slate-600">
