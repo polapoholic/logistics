@@ -240,33 +240,104 @@ export default function HomePage() {
             </div>
           </section>
 
-          {/* 문의 섹션 */}
+          {/* 문의 / 명함 섹션 */}
           <section
               id="contact"
-              className="rounded-3xl border border-sky-100 bg-white p-6 shadow-lg space-y-4"
+              className="rounded-3xl border border-sky-100 bg-white p-6 shadow-lg space-y-5"
           >
             <h2 className="text-xl md:text-2xl font-semibold text-slate-900">
-              문의 및 상담
+              문의 및 연락처
             </h2>
             <p className="text-sm text-slate-600">
-              운송 견적, 물류 아웃소싱, 시스템 연동 등 궁금한 사항을 남겨주시면
-              담당자가 확인 후 빠르게 연락드리겠습니다.
+              운송 견적, 물류 아웃소싱, 상·하차 및 창고 운영 등과 관련하여
+              아래 연락처로 문의해 주시면 {COMPANY_NAME} 담당자가 직접 응대해 드립니다.
             </p>
-            <div className="grid gap-4 text-sm text-slate-700 md:grid-cols-3">
-              <div>
-                <p className="text-[11px] font-semibold uppercase text-slate-500">전화</p>
-                <p className="mt-1">02-000-0000</p>
+
+            {/* 명함 카드 */}
+            <div className="mt-3 flex flex-col gap-4 md:flex-row md:items-stretch">
+              {/* 왼쪽: 명함 정보 */}
+              <div className="flex-1 rounded-2xl border border-slate-200 bg-slate-50/70 p-5">
+                {/* 상호 / 로고 느낌 영역 */}
+                <div className="flex items-center justify-between gap-4 border-b border-slate-200 pb-3 mb-3">
+                  <div>
+                    <p className="text-sm font-semibold text-slate-900">{COMPANY_NAME}</p>
+                    <p className="text-[11px] tracking-[0.18em] uppercase text-slate-500">
+                      {COMPANY_NAME_EN}
+                    </p>
+                  </div>
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-sky-500 text-xs font-semibold text-white shadow-sm">
+                    DS
+                  </div>
+                </div>
+
+                {/* 대표자 / 직급 */}
+                <div className="mb-3">
+                  <p className="text-xs font-semibold text-slate-500">대표자</p>
+                  <p className="mt-1 text-sm text-slate-900">
+                    이&nbsp;대표
+                    <span className="ml-1 text-xs text-slate-500">대표이사</span>
+                  </p>
+                </div>
+
+                {/* 연락처 정보 */}
+                <div className="grid gap-2 text-sm text-slate-800">
+                  <div className="flex gap-2">
+                    <span className="w-14 text-xs font-semibold text-slate-500">전화</span>
+                    <span>02-000-0000</span>
+                  </div>
+                  <div className="flex gap-2">
+                    <span className="w-14 text-xs font-semibold text-slate-500">팩스</span>
+                    <span>02-000-0001</span>
+                  </div>
+                  <div className="flex gap-2">
+                    <span className="w-14 text-xs font-semibold text-slate-500">이메일</span>
+                    <span>sales@daseong-logis.co.kr</span>
+                  </div>
+                </div>
+
+                {/* 주소 */}
+                <div className="mt-4">
+                  <p className="text-xs font-semibold text-slate-500">주소</p>
+                  <p className="mt-1 text-xs leading-relaxed text-slate-700">
+                    (우) 00000 서울특별시 ○○구 ○○로 00, 다성 물류 센터
+                  </p>
+                </div>
               </div>
-              <div>
-                <p className="text-[11px] font-semibold uppercase text-slate-500">이메일</p>
-                <p className="mt-1">sales@daseong-logis.co.kr</p>
-              </div>
-              <div>
-                <p className="text-[11px] font-semibold uppercase text-slate-500">주소</p>
-                <p className="mt-1">서울시 ○○구 ○○로 00, 다성 물류 센터</p>
+
+              {/* 오른쪽: 액션 영역 */}
+              <div className="w-full md:w-64 rounded-2xl border border-sky-100 bg-sky-50/70 p-5 flex flex-col justify-between">
+                <div>
+                  <p className="text-xs font-semibold text-sky-600 uppercase tracking-[0.18em]">
+                    CONTACT
+                  </p>
+                  <p className="mt-2 text-sm font-semibold text-slate-900">
+                    운송 견적이 필요하신가요?
+                  </p>
+                  <p className="mt-1 text-xs text-slate-600 leading-relaxed">
+                    기본 정보(출고지, 도착지, 물량)를 알려주시면
+                    가장 적합한 운송 방법과 예상 비용을 안내해 드립니다.
+                  </p>
+                </div>
+
+                <div className="mt-4 flex flex-col gap-2">
+                  <button
+                      type="button"
+                      onClick={handleOpenModal}
+                      className="w-full rounded-full bg-sky-500 px-4 py-2 text-xs font-medium text-white hover:bg-sky-600 transition-colors"
+                  >
+                    운송 견적 문의하기
+                  </button>
+                  <a
+                      href="tel:0200000000"
+                      className="w-full rounded-full border border-sky-200 bg-white px-4 py-2 text-xs font-medium text-sky-700 text-center hover:bg-sky-50 transition-colors"
+                  >
+                    전화 연결 (02-000-0000)
+                  </a>
+                </div>
               </div>
             </div>
           </section>
+
           {/* 문의 모달 */}
           {isModalOpen && (
               <div className="fixed inset-0 z-30 flex items-center justify-center bg-black/40">
