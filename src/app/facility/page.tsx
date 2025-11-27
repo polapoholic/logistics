@@ -14,12 +14,10 @@ export default function FacilityPage() {
             <div className="mx-auto max-w-6xl px-4 py-10 space-y-10">
                 {/* 상단 헤더 / 브레드크럼 */}
                 <header className="space-y-3">
-                    <nav className="text-xs text-slate-500">
-                        <Link href="/" className="hover:text-sky-600">
-                            홈
+                    <nav className="text-sm font-medium text-slate-600">
+                        <Link href="/" className="hover:text-sky-700">
+                            ← 메인으로 돌아가기
                         </Link>
-                        <span className="mx-1">/</span>
-                        <span className="text-slate-700">시설 소개</span>
                     </nav>
                     <div>
                         <p className="text-[11px] font-semibold tracking-[0.22em] text-sky-500 uppercase">
